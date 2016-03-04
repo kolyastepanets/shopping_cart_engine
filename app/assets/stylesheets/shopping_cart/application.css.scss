@@ -1,0 +1,894 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 12px;
+}
+
+
+body {
+  input:focus {
+    border-color: none !important;
+  };
+}
+
+
+
+/* APPLICATION HTML */
+
+.container-fluid {
+  width: 800px;
+  max-width: none !important;
+}
+
+.nav {
+  margin-top: 10px;
+  margin-left: 15px;
+}
+
+.nav-p {
+  display: inline;
+}
+
+.nav-link {
+  text-decoration: underline;
+}
+
+.nav-links {
+  padding: 0;
+}
+
+.header-info {
+  /*height: 66px;*/
+}
+
+.header-info:last-child {
+  padding-left: 20px;
+}
+
+.header-info:nth-child(2) {
+  padding: 0;
+  width: 170px;
+}
+
+.header-info:nth-child(3) {
+  padding: 0;
+}
+
+.home-shop {
+  height: 56px;
+}
+
+.cart-img {
+  padding: 0;
+  width: 80px;
+}
+
+.image-cart {
+  margin-top: 10px;
+  margin-left: 15px;
+}
+
+.cart-text {
+  padding: 0;
+  margin: 10px 0 0 0;
+}
+
+.empty-cart {
+  margin: 10px 0 0 10px;
+}
+
+.settings-links {
+  margin: 20px 0 0 0;
+}
+
+.products {
+  margin-top: 20px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* HOME PAGE */
+
+.title-book {
+  font-size: 16px;
+}
+
+.description-text-home-page {
+  font-size: 13px;
+  min-height: 200px;
+  margin: 0 0 0 20px;
+}
+
+.image-and-text {
+  margin-top: 15px;
+}
+
+.book-price {
+  font-size: 18px;
+}
+
+.footer-text {
+  width: 350px;
+  text-align: center;
+  font-size: 16px;
+  margin: 0 auto;
+}
+
+.title_with_author {
+  display: inline;
+}
+
+.title_with_author:last-child {
+  text-decoration: underline;
+  font-size: 12px;
+}
+
+.title_with_author:nth-child(2) {
+  margin-left: 10px;
+  margin-right: 5px;
+  font-size: 12px;
+}
+
+.item {
+  width: 670px;
+  margin-left: 50px;
+}
+
+.carousel-control.left, .carousel-control.right {
+  background-image: none;
+  width: 50px;
+  /*background-color: black;*/
+}
+
+.image-narrow {
+  width: 50px;
+  margin-top: 90px;
+}
+
+.col-price-book-on-home {
+  padding: 0;
+  margin-left: 35px;
+  margin-top: 5px;
+}
+
+.add-to-cart-btn-home-page {
+  padding: 0;
+}
+
+.price-and-btn {
+  margin-top: 15px;
+}
+
+span.glyphicon.glyphicon-triangle-left, span.glyphicon.glyphicon-triangle-right {
+  color: black;
+  margin-top: 100px;
+}
+
+.footer {
+  margin-top: 30px;
+  font-weight: bold;
+}
+
+.carousel-indicators {
+  background-color: lightgray;
+  margin-left: 270px;
+  width: 50px;
+  padding-top: 5px;
+  margin-bottom: -15px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* SIGN IN PAGE */
+
+.panel {
+  border: none;
+  width: 40%;
+  margin: 0 auto;
+}
+
+.facebook {
+  width: 50px;
+  margin: 0 auto;
+}
+
+.or {
+  width: 50px;
+  margin: 15px auto 0;
+  text-align: center;
+}
+
+.facebook-img {
+  width: 50px;
+  height: 50px;
+}
+
+.inputContainer {
+  position: relative;
+}
+
+.myInput {
+  padding-left: 25px;
+}
+
+.link-input {
+  right: 20px;
+  position: absolute;
+  top: 8px;
+}
+
+label.remember_me {
+  padding: 2px 0 0 0;
+  margin: 0;
+}
+
+.remember-check-box {
+  padding: 0;
+  margin: 0;
+}
+
+.sign-up-btn {
+  margin-left: 10px;
+  text-decoration: underline;
+}
+
+
+
+
+
+
+
+
+/* BOOKS INDEX */
+
+.title-book {
+  font-size: 16px;
+}
+
+.product {
+  margin-bottom: 20px;
+}
+
+.link-button {
+  text-align: center;
+  font-size: 16px;
+}
+
+.price-product {
+  text-align: center;
+  color: black;
+  font-size: 16px;
+  margin-top: 5px;
+}
+
+.category {
+  font-size: 14px;
+}
+
+.caption {
+  height: 9em;
+}
+
+ul.pagination {
+  margin-left: 13em;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* BOOKS SHOW */
+
+.title-book {
+  font-size: 16px;
+}
+
+.book-price-on-book-page {
+  font-size: 20px;
+  margin-top: 12px;
+}
+
+.description-text {
+  font-size: 13px;
+  min-height: 200px;
+  margin: 0;
+}
+
+.reviews {
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.div-review {
+  margin: 0;
+  padding: 0;
+}
+
+.reviews-title, .link-add-review {
+  margin: 0;
+}
+
+.add-review-btn {
+  text-decoration: underline;
+  padding: 0;
+}
+
+.the-whole-review {
+  margin-bottom: 30px;
+}
+
+table > tbody > tr > th.book-rating {
+  padding: 8px 0;
+  width: 110px;
+  margin: 0;
+}
+
+th.title-review {
+  font-size: 14px;
+  width: 1%;
+  white-space: nowrap;
+}
+
+th.created-review {
+  font-size: 14px;
+  color: #777777;;
+}
+
+.link-to-customer {
+  margin-bottom: 10px;
+}
+
+.link {
+  text-decoration: underline;
+}
+
+/*.form-control {
+  width: 70px;
+}*/
+
+.form-control.input-field-width {
+  width: 70px;
+}
+
+
+
+
+
+
+
+
+/* REVIEW NEW */
+
+.title-review-for-new-page {
+  margin: 0;
+  padding: 0;
+  width: 170px;
+}
+
+.book-title-for-new-review {
+  margin: 0;
+  padding: 3px 0;
+  font-size: 17px;
+  text-decoration: underline;
+}
+
+.review-field {
+  margin-bottom: 10px;
+}
+
+.text-beside-btn-review {
+  display: inline;
+  margin-left: 10px;
+}
+
+.link-beside-btn-review {
+  margin-left: 10px;
+  text-decoration: underline;
+}
+
+.select-for-rating {
+  margin-bottom: 10px;
+}
+
+.label-rating {
+  margin-right: 10px;
+}
+
+.whole-title-new-review {
+  margin-bottom: 20px;
+}
+
+
+
+
+
+
+
+
+
+/* ORDER CART */
+
+table.table {
+  margin: 0;
+}
+
+.table-title {
+  text-align: center;
+}
+
+tr.line-in-cart:last-child {
+  border-bottom: 2px solid black;
+}
+
+.book-title-in-cart {
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.book-price-in-cart {
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.cross-in-cart-btn {
+  width: 10px;
+  border: none;
+  background-color: white;
+  /*background-color: "cross.png";*/
+  /*background-color: none;*/
+  /*color: none;*/
+  /*background-image: url("cross.png");*/
+  /*background-image: url(cross.png);*/
+}
+
+.p-book-price-in-cart {
+  display: inline;
+}
+
+.p-book-price-in-cart {
+  margin-right: 10px;
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.p-title-for-table {
+  font-size: 14px;
+}
+
+.empty-rignt {
+  width: 25px;
+}
+
+table > tbody > tr > td.text-right {
+  border: none;
+}
+
+table > tbody > tr > td.text-left.discount-price-column {
+  border: none;
+  padding: 0 0 0 10px;
+}
+
+table > tbody > tr > td.text-left.total-price-column {
+  padding: 8px 0 0 10px;
+  width: 80px;
+}
+
+table > tbody > tr > td.text-right.title-for-integer {
+  padding: 0 10px 0px 0;
+}
+
+table > tbody > tr > td.text-right.title-subtotal-price {
+  padding: 10px 10px 0px 0;
+}
+
+table > tbody > tr > td.text-right.title-subtotal-price-with-discount {
+  padding: 0 10px 0 0;
+}
+
+table > tbody > tr > td.text-left.total-price-with-discount-column {
+  padding: 0 0 0 10px;
+  border: none;
+}
+
+table > tbody > tr > td.text-left.shipping-price-column {
+  padding: 0 0 0 10px;
+  border: none;
+}
+
+table > tbody > tr > td.left-empty-column {
+  min-width: 380px;
+  border: none;
+}
+
+table > tbody > tr > td.empty-rignt {
+  border: none;
+}
+
+table > tbody > tr > td.buttons-for-cart {
+  border-top: 2px solid black;
+}
+
+table > tbody > tr > td.empty-column {
+  border-top: 2px solid black;
+}
+
+/*.products {
+  width: 770px;
+}
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+/* ORDER ADDRESS */
+
+.checkout {
+  margin: 0;
+}
+
+.link-in-order:first-child {
+  margin: 0;
+}
+
+.link-in-order {
+  margin-left: 10px;
+}
+
+.active-link {
+  text-decoration: underline;
+}
+
+.columns-addresses {
+  margin-top: 20px;
+}
+
+.address-input-field {
+  margin-top: 20px;
+}
+
+.all-addresses {
+  padding: 0;
+}
+
+.each-address-column:first-child {
+  padding-left: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* ORDER PAYMENT */
+
+.month-year-field {
+  padding: 0;
+  width: 45%;
+  margin-right: 10%;
+}
+
+.month-year-field:last-child {
+  margin: 0;
+}
+
+#order_credit_card_expiration_month, #order_credit_card_expiration_year {
+  margin: 0;
+}
+
+.month-year-field-link {
+  padding: 0;
+  width: 45%;
+  margin-top: 14%;
+}
+
+#order_credit_card_attributes_expiration_month, #order_credit_card_attributes_expiration_year {
+  margin: 0;
+}
+
+
+
+
+
+
+
+
+
+
+/* ORDER CONFIRM */
+
+.confrim-title {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.column-title {
+  padding: 0;
+}
+
+.title-row {
+  padding: 0;
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+table > tbody > tr > td.table-title-confirm {
+  border: none;
+  padding: 0;
+}
+
+table > tbody > tr > td.table-title-confirm:first-child {
+  width: 210px;
+}
+
+table > tbody > tr > td.table-title-confirm:nth-child(2) {
+  width: 190px;
+}
+
+.column-info {
+  padding: 0;
+}
+
+.info {
+  margin: 0;
+}
+
+.link-style {
+  font-size: 13px;
+  font-weight: normal;
+}
+
+.addresses-titles {
+  padding: 0;
+}
+
+table.table.table-confirm-order {
+  margin-bottom: 30px;
+}
+
+td.text-right.ship-price {
+  padding-top: 0;
+  border: none;
+}
+
+td.text-right.total-price-in-order {
+  padding-bottom: 0;
+}
+
+.columns-addresses {
+  margin-bottom: 100px;
+}
+
+
+
+
+
+
+
+
+
+
+/* ORDER COMPLETED */
+
+.order-number {
+  margin: 0;
+  margin-bottom: 20px;
+}
+
+
+
+
+
+
+
+
+/* USER SETTINGS */
+
+.title-user-address {
+  border-bottom: 2px solid black;
+}
+
+.all-addresses {
+  margin-top: 30px;
+}
+
+.remove-account {
+  margin-top: 20px;
+}
+
+#deleteAccount {
+  display: inline-block;
+}
+
+.checbox-for-user {
+  padding: 0;
+}
+
+.checbox-for-user:last-child {
+  margin-top: 25px;
+}
+
+.save-billing-address, .save-shipping-address {
+  margin-top: 20px;
+}
+
+
+
+
+
+
+.field_with_errors {
+  input {
+    border-color: red;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+/* ORDERS INDEX */
+
+table > tbody > tr > td.table-title-order {
+  border-top: 2px solid black;
+}
+
+.in-progress-title {
+  margin: 0;
+  font-weight: bold;
+}
+
+.btn-go-to-cart {
+  margin-top: 10px;
+}
+
+table > tbody > tr > td.table-title-order-processing {
+  width: 120px;
+  border-top: 2px solid black;
+  padding-top: 16px;
+}
+
+table > tbody > tr > td.table-title-order-processing-number {
+  border-top: 2px solid black;
+  width: 160px;
+  padding-top: 16px;
+}
+
+table > tbody > tr > td.table-title-order-processing-date {
+  border-top: 2px solid black;
+  width: 160px;
+  padding-top: 16px;
+}
+
+table > tbody > tr > td.table-title-order-processing-total {
+  border-top: 2px solid black;
+  width: 80px;
+  padding-top: 16px;
+}
+
+table > tbody > tr > td.processing-order-link {
+  padding: 8px 0 0 8px;
+  border: none;
+  text-decoration: underline;
+}
+
+table > tbody > tr > td.date-processing-order {
+  padding: 8px 0 0 8px;
+  border: none;
+}
+
+table > tbody > tr > td.number-processing-order {
+  padding: 8px 0 0 8px;
+  border: none;
+}
+
+table > tbody > tr > td.table-title-order-processing:first-child {
+  padding-left: 16px;
+}
+
+table > tbody > tr > td.table-title-order-processing-last {
+  border-top: 2px solid black;
+}
+
+table > tbody > tr > td.total-price-processing-order {
+  padding: 8px 0 0 8px;
+  border: none;
+  /*width: 100px;*/
+}
+
+.processing-order {
+  margin-top: 50px;
+}
+
+
+
+
+
+
+
+
+
+
+/*  ORDER SHOW   */
+
+.order-status {
+  display: inline-block;
+}
+
+h3.order-status {
+  margin-top: 0;
+}
+
+p.order-status {
+  margin-left: 20px;
+  color: gray;
+}
+
+.link-to-orders {
+  text-decoration: underline;
+}

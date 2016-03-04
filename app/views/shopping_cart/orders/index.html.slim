@@ -1,0 +1,130 @@
+div class="row columns-addresses"
+  div class="col-xs-12"
+    h3 class="order-number"
+      | Orders
+  div class="col-xs-12"
+    table class="table"
+      tr
+        h4 class="in-progress-title"
+          | IN PROGRESS
+        - unless @current_order.nil? || @current_order.order_items.empty?
+          td class="table-title-order"
+          td class="table-title-order"
+            | BOOK
+          td class="table-title-order"
+            | PRICE
+          td class="table-title-order"
+            | QTY
+          td class="table-title-order"
+            | TOTAL
+          - @current_order.order_items.each do |order_item|
+            tr class="line-in-cart"
+              td
+                = link_to main_app.book_path(order_item.book)
+                  = image_tag("default1.png", class: "image-in-cart")
+              td
+                p class="book-title-in-cart"
+                  = order_item.book.title
+                p
+                  = truncate(order_item.book.description, length: 180)
+              td class="book-price-in-cart"
+                = number_to_currency order_item.unit_price
+              td class="book-price-in-cart"
+                = order_item.quantity
+
+              td class="book-price-in-cart"
+                = number_to_currency order_item.total_price
+
+          table class="table"
+            tr
+              td
+                = link_to "GO TO CART", cart_path, class: "btn btn-primary btn-go-to-cart"
+              td class="text-right total-price-in-order"
+                p class="p-book-price-in-cart"
+                  | SUBTOTAL:
+                p class="p-book-price-in-cart"
+                  = number_to_currency @current_order.total_price
+
+  div class="col-xs-12 processing-order"
+    table class="table"
+      tr
+        h4 class="in-progress-title"
+          | WAITING FOR PROCESSING
+        - unless @in_processing.nil?
+          td class="table-title-order-processing-number"
+            | NUMBER
+          td class="table-title-order-processing-date"
+            | COMPLETED AT
+          td class="table-title-order-processing-total"
+            | TOTAL
+          td class="table-title-order-processing-last"
+          - @in_processing.each do |order|
+            tr class=""
+              td class="number-processing-order"
+                | R
+                = order.id
+
+              td class="date-processing-order"
+                = order.completed_date
+
+              td class="total-price-processing-order"
+                = number_to_currency order.total_price_with_delivery_with_discount
+
+              td class="processing-order-link"
+                = link_to "View", order_path(order)
+
+  div class="col-xs-12 processing-order"
+    table class="table"
+      tr
+        h4 class="in-progress-title"
+          | IN DELIVERY
+        - unless @in_delivery.nil?
+          td class="table-title-order-processing-number"
+            | NUMBER
+          td class="table-title-order-processing-date"
+            | COMPLETED AT
+          td class="table-title-order-processing-total"
+            | TOTAL
+          td class="table-title-order-processing-last"
+          - @in_delivery.each do |order|
+            tr class=""
+              td class="number-processing-order"
+                | R
+                = order.id
+
+              td class="date-processing-order"
+                = order.completed_date
+
+              td class="total-price-processing-order"
+                = number_to_currency order.total_price_with_delivery_with_discount
+
+              td class="processing-order-link"
+                = link_to "View", order_path(order)
+
+  div class="col-xs-12 processing-order"
+    table class="table"
+      tr
+        h4 class="in-progress-title"
+          | DELIVERED
+        - unless @delivered.nil?
+          td class="table-title-order-processing-number"
+            | NUMBER
+          td class="table-title-order-processing-date"
+            | COMPLETED AT
+          td class="table-title-order-processing-total"
+            | TOTAL
+          td class="table-title-order-processing-last"
+          - @delivered.each do |order|
+            tr class=""
+              td class="number-processing-order"
+                | R
+                = order.id
+
+              td class="date-processing-order"
+                = order.completed_date
+
+              td class="total-price-processing-order"
+                = number_to_currency order.total_price_with_delivery_with_discount
+
+              td class="processing-order-link"
+                = link_to "View", order_path(order)

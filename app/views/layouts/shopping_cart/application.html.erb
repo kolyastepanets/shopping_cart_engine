@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ShoppingCart</title>
+  <%= stylesheet_link_tag    "shopping_cart/application", media: "all" %>
+  <%= javascript_include_tag "shopping_cart/application" %>
+  <%= javascript_include_tag 'jquery', 'bootstrap', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+  <body>
+    <div class="container-fluid">
+      <div class="header">
+        <div class="row">
+          <div class="col-xs-3 header-info">
+            <h3 class="text-muted">
+              The Bookstore
+            </h3>
+          </div>
+
+          <div class="col-xs-3 header-info">
+            <div class="home-shop">
+              <ul class="nav nav-pills">
+                <li role="presentation">
+                  <%= link_to 'Home', main_app.root_path %>
+                </li>
+                <li role="presentation">
+                  <%= link_to 'Shop', main_app.books_path %>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-xs-3 header-info">
+            <div class="col-xs-6 cart-img">
+              <%= image_tag("cart.png", :alt => "Cart", class:"image-cart") %>
+            </div>
+            <div class="col-xs-6 cart-text">
+              <% if !@order.nil? %>
+                <% if @order.order_items.size == 0 %>
+                  <p class="empty-cart">
+                    (Empty Cart)
+                  </p>
+                <% else %>
+                  <%= link_to "#{@order.total_quantity} ( #{number_to_currency @order.total_price_with_delivery_with_discount} )", cart_path, class: "btn btn-link" %>
+                <% end %>
+              <% else %>
+                <p class="empty-cart">
+                  (Empty Cart)
+                </p>
+              <% end %>
+            </div>
+          </div>
+
+          <div class="col-xs-3 header-info">
+            <ul class="nav nav-pills settings-links">
+              <% if current_user %>
+                <p class="nav-p">
+                  <%= link_to('Settings', main_app.edit_user_registration_path, class: "nav-link") %>
+                  |
+                </p>
+                <p class="nav-p">
+                  <%= link_to('Orders', orders_path, class: "nav-link") %>
+                  |
+                </p>
+                <p class="nav-p">
+                  <%= link_to "Sign out", main_app.destroy_user_session_path, :method => :delete, class: "nav-link" %>
+                </p>
+              <% else %>
+                <p class="nav-p">
+                  <%= link_to('Sign in', main_app.new_user_session_path, class: "nav-link") %>
+                  |
+                </p>
+                <p class="nav-p">
+                  <%= link_to('Sign up', main_app.new_user_registration_path, class: "nav-link") %>
+                </p>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="products">
+        <div class="col-xs-12">
+          <% flash.each do |key, value| %>
+            <div class="alert alert-<%= key %>"><%= value %></div>
+          <% end %>
+        </div>
+        <%= yield %>
+      </div>
+    </div>

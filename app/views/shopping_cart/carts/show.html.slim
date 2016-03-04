@@ -1,0 +1,91 @@
+- if @order.nil? || @order.order_items.empty?
+  p class="text-center"
+    | There are no items in your shopping cart. Please
+    => link_to "go back", root_path
+    | and add some items to your cart.
+- else
+    = form_for @order, url: {controller: "carts", action: "update"}, method: :patch do |cc|
+      table class="table"
+        tr
+          td class="table-title"
+          td class="table-title"
+            | BOOK
+          td class="table-title"
+            | PRICE
+          td class="table-title"
+            | QTY
+          td class="table-title"
+            | TOTAL
+          td
+        - @order.order_items.each do |order_item|
+          = fields_for "items[]", order_item do |a|
+            tr class="line-in-cart"
+              td
+                = link_to main_app.book_path(order_item.book)
+                  = image_tag("default1.png", class: "image-in-cart")
+              td
+                p class="book-title-in-cart"
+                  = order_item.book.title
+                p
+                  = truncate(order_item.book.description, length: 180)
+              td class="book-price-in-cart"
+                = number_to_currency order_item.unit_price
+              td
+                = a.number_field :quantity, value: order_item.quantity.to_i, class: "form-control", min: 1
+
+              td class="book-price-in-cart"
+                = number_to_currency order_item.total_price
+
+              td class= "book-#{order_item.book.id}"
+                = button_to order_item, method: :delete, class: "cross-in-cart-btn"
+                  = image_tag("cross.png", class: "cross-in-cart-btn")
+
+        table class="table"
+          tr
+            td class="left-empty-column"
+            td class="text-right title-subtotal-price"
+              p class="p-title-for-table"
+                | SUBTOTAL:
+            td class="text-left total-price-column"
+              p class="p-book-price-in-cart"
+                = number_to_currency @order.total_price
+
+          - if !@order.coupon.nil?
+            tr
+              td class="left-empty-column"
+              td class="text-right title-for-integer"
+                p class="p-title-for-table"
+                  | DISCOUNT:
+              td class="text-left discount-price-column"
+                p class="p-book-price-in-cart"
+                  = @order.coupon.discount
+                  | %
+
+            tr
+              td class="left-empty-column"
+              td class="text-right title-for-integer"
+                - if !@order.coupon.nil?
+                  p class="p-title-for-table"
+                    | SUBTOTAL WITH DISCOUNT:
+                - else
+                  p class="p-title-for-table"
+                    | SUBTOTAL:
+              td class="text-left total-price-with-discount-column"
+                p class="p-book-price-in-cart"
+                  = number_to_currency @order.total_price_with_discount
+
+        table class="table"
+          tr
+            td class="buttons-for-cart"
+              = button_to 'EMPTY CART', cart_path(@cart), method: :delete, class: "btn btn-danger"
+            td class="buttons-for-cart"
+              = link_to 'CONTINUE SHOPPING', main_app.books_path, class: "btn btn-primary"
+            td class="empty-column"
+            td class="buttons-for-cart"
+              = form_for @order do |f|
+                = f.fields_for :coupon_attributes do |cc|
+                  = cc.text_field :name, placeholder: 'Add coupon', class: "form-control coupon-field"
+            td class="buttons-for-cart"
+              = cc.submit "Update", class: "btn btn-primary btn-update-quantity"
+            td class="buttons-for-cart"
+              = link_to 'CHECKOUT', checkout_path(:address), class: "btn btn-primary"

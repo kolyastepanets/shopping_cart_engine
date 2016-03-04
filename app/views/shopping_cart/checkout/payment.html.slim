@@ -1,0 +1,93 @@
+div class="row"
+  div class="col-xs-12 addresses-titles"
+    div class="col-xs-3"
+      h2.checkout
+        | Checkout
+    div class="col-xs-9"
+      div class="col-xs-2 link-in-order"
+        h4
+          - if @order.billing_address.valid? && @order.shipping_address.valid?
+            = link_to "ADDRESS", wizard_path(:address)
+          - else
+            | ADDRESS
+      div class="col-xs-2 link-in-order"
+        h4
+          - if !@order.delivery.nil?
+            = link_to "DELIVERY", wizard_path(:delivery)
+          - else
+            | DELIVERY
+      div class="col-xs-2 link-in-order"
+        h4 class="#{is_active?(step.to_s)}"
+          - if !@order.credit_card.nil?
+            = link_to "PAYMENT", wizard_path(:payment)
+          - else
+            | PAYMENT
+      div class="col-xs-2 link-in-order"
+        h4
+          - if @order.billing_address.valid? && @order.shipping_address.valid? && @order.delivery.valid?
+            = link_to "CONFIRM", wizard_path(:confirm)
+          - else
+            | CONFIRM
+      div class="col-xs-2 link-in-order"
+        h4
+          | COMPLETE
+
+div class="row columns-addresses"
+  div class="col-xs-4"
+    div class="col-xs-12"
+      h4 CREDIT CARD
+    div class="col-xs-12"
+      = form_for @order, url: wizard_path, method: :patch do |f|
+        = f.fields_for :credit_card do |cc|
+          = cc.text_field :number, placeholder: 'Card Number', class: 'form-control address-input-field'
+
+          div class="row"
+            div class="col-xs-12"
+              h5
+                | Expiration date:
+            div class="col-xs-12"
+              div class="col-xs-6 month-year-field"
+                = cc.select(:expiration_month, options_for_select(cc_months), { prompt: "Month" }, {class: 'form-control address-input-field'})
+              div class="col-xs-6 month-year-field"
+                = cc.select(:expiration_year, options_for_select(cc_years), { prompt: "Year" }, {class: 'form-control address-input-field'})
+
+          div class="row"
+            div class="col-xs-12"
+              div class="col-xs-6 month-year-field"
+                = cc.text_field :cvv, placeholder: 'Card Code', class: 'form-control address-input-field'
+              div class="col-xs-6 month-year-field-link"
+                = link_to "(What's This?)", ''
+
+        = f.submit "SAVE AND CONTINUE", class: "btn btn-primary address-input-field"
+
+  div class="col-xs-4"
+    - if @order.credit_card.errors.any?
+      #error_explanation
+        - @order.credit_card.errors.full_messages.each do |msg|
+          div class="alert alert-danger"
+            button.close[type="button" data-dismiss="alert" aria-hidden="true"]
+              | ×
+            = msg
+
+  div class="col-xs-4"
+    div class="col-xs-12"
+      h4 ORDER SUMMARY
+    div class="col-xs-12"
+      - @order.order_items.each do |order_item|
+        h6
+          => truncate(order_item.book.title, length: 15)
+          = number_to_currency order_item.total_price
+
+      - if !@order.coupon.nil?
+        h6
+          | Discount: 
+          = @order.coupon.discount
+          |%
+
+      h6
+        | SHIPPING: 
+        = number_to_currency @order.delivery_price
+
+      h6
+        | ORDER TOTAL: 
+        = number_to_currency @order.total_price_with_delivery_with_discount

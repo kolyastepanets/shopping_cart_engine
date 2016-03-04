@@ -1,0 +1,70 @@
+div class="row"
+  div class="col-xs-12 addresses-titles"
+    div class="col-xs-3"
+      h2.checkout
+        | Checkout
+    div class="col-xs-9"
+      div class="col-xs-2 link-in-order"
+        h4
+          - if @order.billing_address.valid? && @order.shipping_address.valid?
+            = link_to "ADDRESS", wizard_path(:address)
+          - else
+            | ADDRESS
+      div class="col-xs-2 link-in-order"
+        h4 class="#{is_active?(step.to_s)}"
+          - if !@order.delivery.nil?
+            = link_to "DELIVERY", wizard_path(:delivery)
+          - else
+            | DELIVERY
+      div class="col-xs-2 link-in-order"
+        h4
+          - if @order.credit_card.nil?
+            | PAYMENT
+          - else
+            = link_to "PAYMENT", wizard_path(:payment)
+      div class="col-xs-2 link-in-order"
+        h4
+          - if @order.credit_card && @order.billing_address.valid? && @order.shipping_address.valid? && !@order.delivery.nil?
+            = link_to "CONFIRM", wizard_path(:confirm)
+          - else
+            | CONFIRM
+      div class="col-xs-2 link-in-order"
+        h4
+          | COMPLETE
+
+div class="row columns-addresses"
+  div class="col-xs-4"
+    div class="col-xs-12"
+      h4 DELIVERY
+    div class="col-xs-12"
+      = form_for @order, url: wizard_path, method: :patch  do |f|
+        - @deliveries.each do |delivery|
+          label
+            = f.radio_button :delivery_id, delivery.id
+            = "#{delivery.name} + #{number_to_currency(delivery.price)}"
+        = f.submit "SAVE AND CONTINUE", class: "btn btn-primary address-input-field"
+
+  div class="col-xs-4"
+
+  div class="col-xs-4"
+    div class="col-xs-12"
+      h4 ORDER SUMMARY
+    div class="col-xs-12"
+      - @order.order_items.each do |order_item|
+        h6
+          => truncate(order_item.book.title, length: 15)
+          = number_to_currency order_item.total_price
+
+      /- if !@order.coupon.nil?
+        h6
+          | Discount: 
+          = @order.coupon.discount
+          |%
+
+      h6
+        | SHIPPING: 
+        = number_to_currency @order.delivery_price
+
+      h6
+        | ORDER TOTAL: 
+        = number_to_currency @order.total_price_with_delivery_with_discount

@@ -1,0 +1,179 @@
+div class="row"
+  div class="col-xs-12 addresses-titles"
+    div class="col-xs-3"
+      h2.checkout
+        | Checkout
+    div class="col-xs-9"
+      div class="col-xs-2 link-in-order"
+        h4
+          - if @order.billing_address.valid? && @order.shipping_address.valid?
+            = link_to "ADDRESS", wizard_path(:address)
+          - else
+            | ADDRESS
+      div class="col-xs-2 link-in-order"
+        h4
+          - if !@order.delivery.nil?
+            = link_to "DELIVERY", wizard_path(:delivery)
+          - else
+            | DELIVERY
+      div class="col-xs-2 link-in-order"
+        h4
+          - if @order.credit_card.valid?
+            = link_to "PAYMENT", wizard_path(:payment)
+          - else
+            | PAYMENT
+      div class="col-xs-2 link-in-order"
+        h4 class="#{is_active?(step.to_s)}"
+          - if @order.credit_card.valid? && @order.billing_address.valid? && @order.shipping_address.valid? && !@order.delivery.nil?
+            = link_to "CONFIRM", wizard_path(:confirm)
+          - else
+            | CONFIRM
+      div class="col-xs-2 link-in-order"
+        h4
+          | COMPLETE
+
+div class="row columns-addresses"
+  div class="col-xs-12"
+    h3 CONFIRM
+  div class="col-xs-12"
+    table class="table table-confirm-order"
+      tr
+        td class="table-title-confirm"
+          div class="col-xs-12 title-row"
+            | Billing Address
+            = link_to "(edit)", wizard_path(:address), class: "link-style"
+          div class="col-xs-12 column-info"
+            p class="info"
+              = @order.billing_address.first_name
+            p class="info"
+              = @order.billing_address.last_name
+            p class="info"
+              = @order.billing_address.street
+            p class="info"
+              = @order.billing_address.city
+            p class="info"
+              = @order.billing_address.country.name
+            p class="info"
+              | Phone 
+              = @order.billing_address.phone
+
+        td class="table-title-confirm"
+          div class="col-xs-12 title-row"
+            | Shipping Address
+            = link_to "(edit)", wizard_path(:address), class: "link-style"
+          div class="col-xs-12 column-info"
+            p class="info"
+              = @order.shipping_address.first_name
+            p class="info"
+              = @order.shipping_address.last_name
+            p class="info"
+              = @order.shipping_address.street
+            p class="info"
+              = @order.shipping_address.city
+            p class="info"
+              = @order.shipping_address.country.name
+            p class="info"
+              | Phone 
+              = @order.shipping_address.phone
+
+        td class="table-title-confirm"
+          div class="col-xs-12 title-row"
+            | Shipments
+            = link_to "(edit)", wizard_path(:delivery), class: "link-style"
+          div class="col-xs-12 column-info"
+            p class="info"
+              = @order.delivery.name
+
+        td class="table-title-confirm"
+          div class="col-xs-12 title-row"
+            | Payment Information
+            = link_to "(edit)", wizard_path(:payment), class: "link-style"
+          div class="col-xs-12 column-info"
+            p class="info"
+              = hidden_number_card(@order)
+            p class="info"
+              = month_and_year(@order)
+
+    table class="table"
+      tr
+        td class="table-title"
+        td class="table-title"
+          | BOOK
+        td class="table-title"
+          | PRICE
+        td class="table-title"
+          | QTY
+        td class="table-title"
+          | TOTAL
+      - @order.order_items.each do |order_item|
+        tr class="line-in-cart"
+          td
+            = link_to main_app.book_path(order_item.book)
+              = image_tag("default1.png", class: "image-in-cart")
+          td
+            p class="book-title-in-cart"
+              = order_item.book.title
+            p
+              = truncate(order_item.book.description, length: 180)
+          td class="book-price-in-cart"
+            = number_to_currency order_item.unit_price
+          td class="book-price-in-cart"
+            = order_item.quantity
+
+          td class="book-price-in-cart"
+            = number_to_currency order_item.total_price
+
+    table class="table"
+      tr
+        td class="left-empty-column"
+        td class="text-right title-subtotal-price"
+          p class="p-title-for-table"
+            | SUBTOTAL:
+        td class="text-left total-price-column"
+          p class="p-book-price-in-cart"
+            = number_to_currency @order.total_price
+
+      - if !@order.coupon.nil?
+        tr
+          td class="left-empty-column"
+          td class="text-right title-for-integer"
+            p class="p-title-for-table"
+              | DISCOUNT:
+          td class="text-left discount-price-column"
+            p class="p-book-price-in-cart"
+              = @order.coupon.discount
+              | %
+
+        tr
+          td class="left-empty-column"
+          td class="text-right title-for-integer"
+            - if !@order.coupon.nil?
+              p class="p-title-for-table"
+                | SUBTOTAL WITH DISCOUNT:
+            - else
+              p class="p-title-for-table"
+                | SUBTOTAL:
+          td class="text-left total-price-with-discount-column"
+            p class="p-book-price-in-cart"
+              = number_to_currency @order.total_price_with_discount
+
+      tr
+        td class="left-empty-column"
+        td class="text-right title-for-integer"
+          p class="p-title-for-table"
+            | SHIPPING:
+        td class="text-left shipping-price-column"
+          p class="p-book-price-in-cart"
+            = number_to_currency @order.delivery_price
+
+      tr
+        td class="left-empty-column buttons-for-cart"
+        td class="text-right buttons-for-cart"
+          p class="p-title-for-table"
+            | ORDER TOTAL:
+        td class="text-left buttons-for-cart"
+          p class="p-book-price-in-cart"
+            = number_to_currency @order.total_price_with_delivery_with_discount
+
+    = form_for @order, url: wizard_path, method: :patch do |f|
+      = f.submit "PLACE ORDER", class: "btn btn-primary address-input-field"

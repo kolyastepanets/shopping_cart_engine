@@ -19,7 +19,7 @@ module ShoppingCart
       order_item.destroy
       if @order.order_items.empty?
         @order.destroy
-        redirect_to books_path
+        redirect_to main_app.books_path
       else
         redirect_to cart_path
       end

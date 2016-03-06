@@ -1,10 +1,10 @@
 - if @order.nil? || @order.order_items.empty?
   p class="text-center"
     | There are no items in your shopping cart. Please
-    => link_to "go back", root_path
+    => link_to "go back", main_app.root_path
     | and add some items to your cart.
 - else
-    = form_for @order, url: {controller: "carts", action: "update"}, method: :patch do |cc|
+    = form_tag cart_path, method: "patch" do
       table class="table"
         tr
           td class="table-title"
@@ -37,8 +37,8 @@
                 = number_to_currency order_item.total_price
 
               td class= "book-#{order_item.book.id}"
-                = button_to order_item, method: :delete, class: "cross-in-cart-btn"
-                  = image_tag("cross.png", class: "cross-in-cart-btn")
+                = link_to order_item, method: :delete, class: "cross-in-cart"
+                  = image_tag("cross.png", class: "cross-in-cart")
 
         table class="table"
           tr
@@ -77,7 +77,7 @@
         table class="table"
           tr
             td class="buttons-for-cart"
-              = button_to 'EMPTY CART', cart_path(@cart), method: :delete, class: "btn btn-danger"
+              = link_to 'EMPTY CART', cart_path(@cart), 'data-method' => :delete, class: "btn btn-danger"
             td class="buttons-for-cart"
               = link_to 'CONTINUE SHOPPING', main_app.books_path, class: "btn btn-primary"
             td class="empty-column"
@@ -86,6 +86,6 @@
                 = f.fields_for :coupon_attributes do |cc|
                   = cc.text_field :name, placeholder: 'Add coupon', class: "form-control coupon-field"
             td class="buttons-for-cart"
-              = cc.submit "Update", class: "btn btn-primary btn-update-quantity"
+              = submit_tag "Update", class: "btn btn-primary btn-update-quantity"
             td class="buttons-for-cart"
               = link_to 'CHECKOUT', checkout_path(:address), class: "btn btn-primary"

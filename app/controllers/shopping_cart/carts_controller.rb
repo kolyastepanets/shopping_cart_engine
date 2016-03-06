@@ -5,8 +5,9 @@ module ShoppingCart
     def show
     end
 
-    def update_info
+    def update
       # authorize! :update, Order
+      # byebug
       updating_quantity
       updating_coupon
       redirect_to cart_path
@@ -14,7 +15,6 @@ module ShoppingCart
 
     def destroy
       # authorize! :destroy, Order
-      byebug
       @order.destroy
       redirect_to main_app.books_path
     end

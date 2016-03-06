@@ -1,0 +1,67 @@
+doctype html
+html
+  head
+    title
+      | The Bookstore
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = stylesheet_link_tag    'bootstrap', 'all-app', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'jquery', 'bootstrap', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  body
+    .container-fluid
+      .header
+        .row
+          .col-xs-3.header-info
+            h3.text-muted
+              | The Bookstore
+
+          .col-xs-3.header-info
+            .home-shop
+              ul.nav.nav-pills
+                li{role="presentation", class= "#{ "active" if params[:controller] == 'static_pages' }"}
+                  = link_to 'Home', main_app.root_path
+                li{role="presentation", class= "#{ "active" if params[:controller] == 'books' }"}
+                  = link_to 'Shop', main_app.books_path
+
+          .col-xs-3.header-info
+            .col-xs-6.cart-img
+              = image_tag("cart.png", :alt => "Cart", class:"image-cart")
+            .col-xs-6.cart-text
+              - if !@order.nil?
+                - if @order.order_items.size == 0
+                  p class="empty-cart"
+                    | (Empty Cart)
+                - else
+                  = link_to "#{@order.total_quantity} ( #{number_to_currency @order.total_price_with_delivery_with_discount} )", cart_path, class: "btn btn-link"
+              - else
+                p class="empty-cart"
+                  | (Empty Cart)
+
+          .col-xs-3.header-info
+            ul.nav.nav-pills.settings-links
+              - if current_user
+                p.nav-p
+                  => link_to('Settings', main_app.edit_user_registration_path, class: "nav-link")
+                  '|
+                p.nav-p
+                  => link_to('Orders', orders_path, class: "nav-link")
+                '|
+                p.nav-p
+                  = link_to "Sign out", main_app.destroy_user_session_path, :method => :delete, class: "nav-link"
+              - else
+                p.nav-p
+                  => link_to('Sign in', main_app.new_user_session_path, class: "nav-link")
+                '|
+                p.nav-p
+                  = link_to('Sign up', main_app.new_user_registration_path, class: "nav-link")
+      .products
+        div class="col-xs-12"
+          - flash.each do |name, msg|
+            - if msg.is_a?(String)
+              |  <div class="alert alert-
+              = name.to_s == 'notice' ? 'success' : 'danger'
+              | ">
+              button.close[type="button" data-dismiss="alert" aria-hidden="true"]
+                | ×
+              = content_tag :div, msg, :id => "flash_#{name}"
+        = yield

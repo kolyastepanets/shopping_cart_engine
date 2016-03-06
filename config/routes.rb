@@ -1,11 +1,7 @@
 ShoppingCart::Engine.routes.draw do
   resources :order_items, only: [:create, :destroy]
 
-  resource :cart, only: [:show, :update, :destroy] do
-    member do
-      patch :update_info
-    end
-  end
+  resource :cart, only: [:show, :update, :destroy]
 
   resources :orders, only: [:index, :show]
 

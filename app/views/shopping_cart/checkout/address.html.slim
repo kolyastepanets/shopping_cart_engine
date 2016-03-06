@@ -85,7 +85,7 @@ div class="row"
         div class="col-xs-12"
           - @order.order_items.each do |order_item|
             h6
-              => truncate(order_item.book.title, length: 15)
+              => truncate(order_item.product.title, length: 15)
               = number_to_currency order_item.total_price
           - if !@order.coupon.nil?
             h6

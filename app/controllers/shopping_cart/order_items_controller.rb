@@ -5,16 +5,14 @@ module ShoppingCart
     before_action :set_current_order
 
     def create
-      # authorize! :create, OrderItem
-      if @order.add_book(params[:book_id], params[:quantity], params[:price])
+      if @order.add_product(params[:product_id], params[:quantity], params[:price])
         redirect_to cart_path
       else
-        redirect_to book_path(params[:book_id])
+        redirect_to product_path(params[:product_id])
       end
     end
 
     def destroy
-      # authorize! :destroy, OrderItem
       order_item = @order.order_items.find(params[:id])
       order_item.destroy
       if @order.order_items.empty?
@@ -31,12 +29,16 @@ module ShoppingCart
         if current_user
           current_order ? @order = current_order : create_order
         else
-          begin
-            @order = Order.find(session[:order_id])
-          rescue
-            @order = Order.create
-            session[:order_id] = @order.id
-          end
+          set_session_order
+        end
+      end
+
+      def set_session_order
+        begin
+          @order = Order.find(session[:order_id])
+        rescue
+          @order = Order.create
+          session[:order_id] = @order.id
         end
       end
 

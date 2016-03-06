@@ -20,13 +20,12 @@ div class="row columns-addresses"
           - @current_order.order_items.each do |order_item|
             tr class="line-in-cart"
               td
-                = link_to main_app.book_path(order_item.book)
-                  = image_tag("default1.png", class: "image-in-cart")
+                = image_tag("default1.png", class: "image-in-cart")
               td
                 p class="book-title-in-cart"
-                  = order_item.book.title
+                  = order_item.product.title
                 p
-                  = truncate(order_item.book.description, length: 180)
+                  = truncate(order_item.product.description, length: 180)
               td class="book-price-in-cart"
                 = number_to_currency order_item.unit_price
               td class="book-price-in-cart"
@@ -65,7 +64,7 @@ div class="row columns-addresses"
                 = order.id
 
               td class="date-processing-order"
-                = order.completed_date
+                = order.updated_at
 
               td class="total-price-processing-order"
                 = number_to_currency order.total_price_with_delivery_with_discount

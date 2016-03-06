@@ -4,15 +4,14 @@ module ShoppingCart
 
     validates_numericality_of :quantity, presence: true, only_integer: true, greater_than_or_equal_to: 1
 
-    # belongs_to :product, class_name: "Book"
     belongs_to :order
-    belongs_to :book
+    belongs_to :product, class_name: ShoppingCart.product_class.to_s
 
     def unit_price
       if persisted?
         self.price
       else
-        book.price
+        product.price
       end
     end
 

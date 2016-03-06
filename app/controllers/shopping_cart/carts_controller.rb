@@ -37,5 +37,6 @@ module ShoppingCart
           end
         end
       end
+
   end
 end

@@ -9,8 +9,6 @@ module ShoppingCart
 
     steps :address, :delivery, :payment, :confirm
 
-    # before_action :authenticate_user!
-
     def show
       case step
         when :address
@@ -86,8 +84,8 @@ module ShoppingCart
       def check_order
         if wizard_path == "/shopping/checkout/wicked_finish"
           redirect_to completed_checkout_path
-        elsif @order.order_items.empty?
-          redirect_to books_path
+        elsif @order.nil? || @order.order_items.empty?
+          redirect_to main_app.root_path
         end
       end
 

@@ -73,7 +73,7 @@ ActiveRecord::Schema.define(version: 20160303194847) do
   create_table "shopping_cart_order_items", force: :cascade do |t|
     t.decimal  "price"
     t.integer  "quantity"
-    t.integer  "book_id"
+    t.integer  "product_id"
     t.integer  "order_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

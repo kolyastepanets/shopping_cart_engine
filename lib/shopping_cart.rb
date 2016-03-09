@@ -2,7 +2,7 @@ require "shopping_cart/engine"
 require 'aasm'
 require 'wicked'
 require 'slim-rails'
-require 'byebug'
+# require 'byebug'
 
 module ShoppingCart
 

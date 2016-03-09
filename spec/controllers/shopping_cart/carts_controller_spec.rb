@@ -1,20 +1,25 @@
-require 'rails_helper'
+# require 'rails_helper'
 
-module ShoppingCart
-  RSpec.describe CartsController, type: :controller do
-#     let(:user) { create(:user) }
+# module ShoppingCart
+#   RSpec.describe CartsController, type: :controller do
+#     routes { ShoppingCart::Engine.routes }
+
 #     let(:book) { create(:book) }
 #     let(:book2) { create(:book) }
-#     let!(:order_item) { create(:order_item, book: book) }
-#     let!(:order_item2) { create(:order_item, book: book2) }
-#     let!(:order) { create(:order, order_items: [order_item, order_item2], user: user) }
-#     let!(:coupon) { create(:coupon) }
-#     let!(:other_coupon) { create(:coupon, name: "new_year") }
+#     let!(:order_item) { create(:shopping_cart_order_item, product: book) }
+#     let!(:order_item2) { create(:shopping_cart_order_item, product: book2) }
+#     let!(:order) { create(:shopping_cart_order, order_items: [order_item, order_item2]) }
+#     let!(:coupon) { create(:shopping_cart_coupon) }
+#     let!(:other_coupon) { create(:shopping_cart_coupon, name: "new_year") }
+
+#     before { allow(controller).to receive(:current_user).and_return(false) }
+#     # before { allow(ApplicationController).to receive(:set_order).and_return(order) }
 
 #     describe 'GET #show' do
-#       before { get :show, id: order, user: user }
+#       before { get :show, id: order }
 
 #       it 'assigns order to @order' do
+#         # byebug
 #         expect(assigns(:order)).to eq order
 #       end
 
@@ -24,14 +29,12 @@ module ShoppingCart
 #     end
 
 #     describe 'PATCH #update' do
-#       before { allow(controller).to receive(:current_order).and_return(order) }
 
 #       context "updating quantity" do
 
 #         before { allow(controller).to receive(:updating_coupon).and_return(false) }
 
 #         it "changes the order_item's quantity" do
-#           # binding.pry
 #           patch :update, id: order_item, order_id: order, items: { order_item.id => { quantity: 2 } }
 #           expect(assigns(:order)).not_to be_nil
 #         end
@@ -81,5 +84,5 @@ module ShoppingCart
 #         expect(response).to redirect_to books_path
 #       end
 #     end
-  end
-end
+#   end
+# end

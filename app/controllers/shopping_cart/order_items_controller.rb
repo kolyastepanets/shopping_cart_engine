@@ -3,6 +3,7 @@ require_dependency "shopping_cart/application_controller"
 module ShoppingCart
   class OrderItemsController < ApplicationController
     before_action :set_current_order
+    before_action :load_order_item, only: :destroy
 
     def create
       if @order.add_product(params[:product_id], params[:quantity], params[:price])
@@ -13,8 +14,7 @@ module ShoppingCart
     end
 
     def destroy
-      order_item = @order.order_items.find(params[:id])
-      order_item.destroy
+      @order_item.destroy
       if @order.order_items.empty?
         @order.destroy
         redirect_to main_app.books_path
@@ -25,9 +25,13 @@ module ShoppingCart
 
     private
 
+      def load_order_item
+        @order_item = @order.order_items.find(params[:id])
+      end
+
       def set_current_order
         if current_user
-          current_order ? @order = current_order : create_order
+          current_order ? @order = current_user_order : create_order
         else
           set_session_order
         end

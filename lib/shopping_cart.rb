@@ -1,8 +1,10 @@
 require "shopping_cart/engine"
+require 'aasm'
+require 'wicked'
+require 'slim-rails'
+require 'byebug'
 
 module ShoppingCart
-  require 'aasm'
-  require 'wicked'
 
   mattr_accessor :user_class
   mattr_accessor :product_class

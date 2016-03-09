@@ -17,7 +17,7 @@ module ShoppingCart
 
     def hidden_number_card(order)
       num = order.credit_card.number.to_s
-      '*' * 2 + " " + '*' * 2 + " " + "*" * 2 + " " + num[-4..-1]
+      "** ** ** " + num[-4..-1]
     end
 
     def month_and_year(order)

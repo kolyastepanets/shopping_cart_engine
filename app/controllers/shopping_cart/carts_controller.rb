@@ -6,17 +6,14 @@ module ShoppingCart
     end
 
     def update
-      # authorize! :update, Order
-      # byebug
       updating_quantity
       updating_coupon
       redirect_to cart_path
     end
 
     def destroy
-      # authorize! :destroy, Order
       @order.destroy
-      redirect_to main_app.books_path
+      redirect_to main_app.root_path
     end
 
     private

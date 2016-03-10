@@ -1,0 +1,17 @@
+Description:
+    You can modify shopping cart views
+
+Example:
+    rails generate shopping_cart:views
+
+    This will create:
+        app/views/shopping_cart/carts/show.html.slim
+
+        app/views/shopping_cart/checkout/address.html.slim
+        app/views/shopping_cart/checkout/completed.html.slim
+        app/views/shopping_cart/checkout/confirm.html.slim
+        app/views/shopping_cart/checkout/delivery.html.slim
+        app/views/shopping_cart/checkout/payment.html.slim
+
+        app/views/shopping_cart/orders/index.html.slim
+        app/views/shopping_cart/orders/show.html.slim

@@ -8,7 +8,7 @@ module ShoppingCart
         only_integer
     end
 
-    it { should belong_to(:product).class_name('Book') }
+    it { should belong_to(:product) }
     it { should belong_to(:order) }
 
 

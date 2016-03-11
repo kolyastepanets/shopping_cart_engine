@@ -5,7 +5,7 @@ module ShoppingCart
     validates_numericality_of :quantity, presence: true, only_integer: true, greater_than_or_equal_to: 1
 
     belongs_to :order
-    belongs_to :product, class_name: ShoppingCart.product_class.to_s
+    belongs_to :product, polymorphic: true
 
     def unit_price
       if persisted?

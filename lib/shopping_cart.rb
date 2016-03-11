@@ -1,19 +1,11 @@
 require "shopping_cart/engine"
+require "shopping_cart/application_controller_methods"
 require 'aasm'
 require 'wicked'
 require 'slim-rails'
+require 'shopping_cart/acts_as_shopping_cart'
 # require 'byebug'
 
 module ShoppingCart
-
-  mattr_accessor :user_class
-  mattr_accessor :product_class
-
-  def self.user_class
-    @@user_class.constantize
-  end
-
-  def self.product_class
-    @@product_class.constantize
-  end
+  PRODUCTS = []
 end

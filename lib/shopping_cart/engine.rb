@@ -8,5 +8,16 @@ module ShoppingCart
       g.assets false
       g.helper false
     end
+
+    config.to_prepare do
+      ActiveRecord::Base.include ShoppingCart::ActsAsShoppingCart
+    end
+
+    initializer "shopping_cart.action_controller" do
+      ActiveSupport.on_load(:action_controller) do
+        include ShoppingCart::ApplicationControllerMethods
+      end
+    end
+
   end
 end

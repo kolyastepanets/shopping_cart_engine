@@ -5,7 +5,7 @@ module ShoppingCart
     it { should validate_presence_of(:aasm_state) }
     # it { should validate_presence_of(:completed_date) }
 
-    it { should belong_to(:user).class_name('User') }
+    it { should belong_to(:user) }
     it { should belong_to(:coupon) }
     it { should belong_to(:delivery) }
 

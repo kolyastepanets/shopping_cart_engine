@@ -1,0 +1,14 @@
+p#notice = notice
+
+
+= link_to 'Edit', edit_book_path(@book)
+'|
+= link_to 'Back', books_path
+
+
+= form_tag(shopping_cart.order_items_path(book_id: @book)) do
+  .input-group
+    = number_field_tag(:quantity, 1, min: 1, class: 'form-control input-field-width')
+    .input-group-btn
+      = hidden_field_tag :price, value: @book.price
+      = submit_tag "Add to Cart", class: "btn btn-primary"

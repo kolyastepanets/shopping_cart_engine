@@ -5,11 +5,12 @@ module ShoppingCart
 
     validates :aasm_state, presence: true
 
-    belongs_to :user, class_name: ShoppingCart.user_class.to_s
+    belongs_to :user, polymorphic: true
     belongs_to :coupon
     belongs_to :delivery
 
     has_many :order_items, dependent: :destroy
+
     has_one :shipping_address, as: :addressable, class_name: "ShippingAddress"
     accepts_nested_attributes_for :shipping_address
 
@@ -43,12 +44,12 @@ module ShoppingCart
       end
     end
 
-    def add_product(product_id, quantity = 1, price)
-      current_item = order_items.find_by(product_id: product_id)
+    def add_product(product, quantity = 1, price)
+      current_item = order_items.find_by(product: product)
       if current_item
         current_item.update_attributes(quantity: current_item.quantity + quantity.to_i)
       else
-        current_item = order_items.create(product_id: product_id, quantity: quantity, price: price)
+        current_item = order_items.create(product: product, quantity: quantity, price: price)
       end
     end
 

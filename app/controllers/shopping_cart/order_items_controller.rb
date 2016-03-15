@@ -27,10 +27,8 @@ module ShoppingCart
     private
 
       def load_product
-        klass = ShoppingCart::PRODUCTS.map(&:constantize)
-              .detect { |e| params["#{e.name.underscore}_id"] }
-        # byebug
-        @product = klass.find(params["#{klass.name.underscore}_id"])
+        klass = ShoppingCart::PRODUCTS.map(&:constantize).find { |e| params["#{e.to_s.underscore}_id"] }
+        @product = klass.find(params["#{klass.to_s.underscore}_id"])
       end
 
       def load_order_item

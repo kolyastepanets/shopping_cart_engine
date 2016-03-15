@@ -52,7 +52,6 @@ GEM
     arel (6.0.3)
     bcrypt (3.1.10)
     builder (3.2.2)
-    byebug (8.2.2)
     capybara (2.6.2)
       addressable
       mime-types (>= 1.16)
@@ -204,7 +203,6 @@ PLATFORMS
 
 DEPENDENCIES
   aasm
-  byebug
   capybara
   codeclimate-test-reporter
   database_cleaner

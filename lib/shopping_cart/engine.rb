@@ -10,7 +10,7 @@ module ShoppingCart
     end
 
     config.to_prepare do
-      ActiveRecord::Base.include ShoppingCart::ActsAsShoppingCart
+      ActiveRecord::Base.send(:include, ShoppingCart::ActsAsShoppingCart)
     end
 
     initializer "shopping_cart.action_controller" do

@@ -4,7 +4,7 @@ require 'aasm'
 require 'wicked'
 require 'slim-rails'
 require 'shopping_cart/acts_as_shopping_cart'
-# require 'byebug'
+require 'byebug'
 
 module ShoppingCart
   PRODUCTS = []

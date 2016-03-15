@@ -75,7 +75,7 @@ module ShoppingCart
       begin
         @proccesing_order = Order.find(session[:proccesing_order_id])
       rescue
-        redirect_to books_path
+        redirect_to main_app.root_path
       end
     end
 

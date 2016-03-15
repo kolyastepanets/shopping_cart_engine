@@ -27,7 +27,7 @@ mount ShoppingCart::Engine, at: "/shopping"
 
 ### Add behaviour to your product in model
 ```
-class Product < ActiveRecord::Base
+class Book < ActiveRecord::Base
   acts_as_product
 end
 ```

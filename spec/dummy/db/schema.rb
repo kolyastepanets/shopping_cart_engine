@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160315115745) do
+ActiveRecord::Schema.define(version: 20160315124110) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,77 +23,6 @@ ActiveRecord::Schema.define(version: 20160315115745) do
     t.datetime "updated_at",  null: false
     t.string   "description"
   end
-
-  create_table "shopping_cart_addresses", force: :cascade do |t|
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "street"
-    t.string   "city"
-    t.string   "type"
-    t.integer  "country_id"
-    t.integer  "zip"
-    t.string   "phone"
-    t.integer  "addressable_id"
-    t.string   "addressable_type"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-  end
-
-  create_table "shopping_cart_countries", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "shopping_cart_coupons", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "discount"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "shopping_cart_credit_cards", force: :cascade do |t|
-    t.integer  "number",           limit: 8
-    t.integer  "cvv"
-    t.integer  "expiration_month"
-    t.integer  "expiration_year"
-    t.integer  "order_id"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-  end
-
-  create_table "shopping_cart_deliveries", force: :cascade do |t|
-    t.decimal  "price"
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "shopping_cart_order_items", force: :cascade do |t|
-    t.decimal  "price"
-    t.integer  "quantity"
-    t.integer  "order_id"
-    t.integer  "product_id"
-    t.string   "product_type"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-  end
-
-  add_index "shopping_cart_order_items", ["product_type", "product_id"], name: "index_shopping_cart_order_items_on_product_type_and_product_id", using: :btree
-
-  create_table "shopping_cart_orders", force: :cascade do |t|
-    t.string   "aasm_state"
-    t.date     "completed_date"
-    t.integer  "delivery_id"
-    t.integer  "coupon_id"
-    t.decimal  "total_price"
-    t.integer  "user_id"
-    t.string   "user_type"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-  end
-
-  add_index "shopping_cart_orders", ["user_type", "user_id"], name: "index_shopping_cart_orders_on_user_type_and_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.datetime "created_at",                          null: false

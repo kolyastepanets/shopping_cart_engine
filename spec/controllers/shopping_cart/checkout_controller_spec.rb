@@ -136,9 +136,9 @@ module ShoppingCart
       end
 
       context "confirm" do
-        it "changes state's order" do
+        it "redirects to finish page" do
           patch :update, id: :confirm
-          expect(response).to redirect_to("/shopping_cart/checkout/wicked_finish")
+          expect(response).to redirect_to("/shopping/checkout/wicked_finish")
         end
       end
     end

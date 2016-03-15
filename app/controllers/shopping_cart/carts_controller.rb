@@ -24,8 +24,7 @@ module ShoppingCart
 
       def updating_coupon
         unless params[:order][:coupon_attributes][:name] == ""
-          coupon = Coupon.where("name = ?", params[:order][:coupon_attributes][:name])
-          coupon = coupon.first
+          coupon = Coupon.find_by_name(params[:order][:coupon_attributes][:name])
           if coupon.nil?
             flash[:alert] = "Invalid coupon"
           elsif coupon.present?
@@ -33,6 +32,10 @@ module ShoppingCart
             flash[:notice] = "You have successfully used coupon"
           end
         end
+      end
+
+      def coupon_params
+        params.require(:order).permit(coupon_attributes: :name)
       end
 
   end

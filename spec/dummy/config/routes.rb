@@ -4,5 +4,5 @@ Rails.application.routes.draw do
   root to: "books#index"
 
   devise_for :users
-  mount ShoppingCart::Engine => "/shopping_cart"
+  mount ShoppingCart::Engine => "/shopping"
 end

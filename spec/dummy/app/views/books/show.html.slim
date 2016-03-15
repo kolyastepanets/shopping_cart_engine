@@ -1,7 +1,10 @@
 p#notice = notice
 
 = @book.title
+br
 = @book.description
+br
+= @book.price
 
 = link_to 'Edit', edit_book_path(@book)
 '|
@@ -12,5 +15,4 @@ p#notice = notice
   .input-group
     = number_field_tag(:quantity, 1, min: 1, class: 'form-control input-field-width')
     .input-group-btn
-      = hidden_field_tag :price, value: @book.price
       = submit_tag "Add to Cart", class: "btn btn-primary"

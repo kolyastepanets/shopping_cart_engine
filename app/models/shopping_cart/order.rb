@@ -6,8 +6,8 @@ module ShoppingCart
     validates :aasm_state, presence: true
 
     belongs_to :user, polymorphic: true
-    belongs_to :coupon
     belongs_to :delivery
+    belongs_to :coupon
 
     has_many :order_items, dependent: :destroy
 

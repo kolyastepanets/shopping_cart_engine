@@ -5,5 +5,11 @@
       ul
         - @book.errors.full_messages.each do |message|
           li = message
+  = f.label :title
+  = f.text_field :title
+  = f.label :description
+  = f.text_field :description
+  = f.label :price
+  = f.number_field :price
 
   .actions = f.submit

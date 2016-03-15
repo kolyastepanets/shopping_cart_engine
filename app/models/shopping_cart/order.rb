@@ -44,12 +44,12 @@ module ShoppingCart
       end
     end
 
-    def add_product(product, quantity = 1, price)
+    def add_product(product, quantity = 1)
       current_item = order_items.find_by(product: product)
       if current_item
         current_item.update_attributes(quantity: current_item.quantity + quantity.to_i)
       else
-        current_item = order_items.create(product: product, quantity: quantity, price: price)
+        current_item = order_items.create(product: product, quantity: quantity)
       end
     end
 

@@ -15,6 +15,7 @@ require 'factory_girl_rails'
 require 'capybara/rspec'
 require 'database_cleaner'
 require 'shoulda-matchers'
+require 'devise'
 
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 
@@ -25,6 +26,7 @@ RSpec.configure do |config|
   config.include Capybara::RSpecMatchers
   config.include FactoryGirl::Syntax::Methods
   config.include Devise::TestHelpers, type: :controller
+  config.extend ControllerMacros, type: :controller
 
   config.use_transactional_fixtures = false
 

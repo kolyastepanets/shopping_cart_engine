@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160310125302) do
+ActiveRecord::Schema.define(version: 20160314162256) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,6 +78,8 @@ ActiveRecord::Schema.define(version: 20160310125302) do
     t.datetime "updated_at",   null: false
   end
 
+  add_index "shopping_cart_order_items", ["product_type", "product_id"], name: "index_shopping_cart_order_items_on_product_type_and_product_id", using: :btree
+
   create_table "shopping_cart_orders", force: :cascade do |t|
     t.string   "aasm_state"
     t.date     "completed_date"
@@ -89,6 +91,8 @@ ActiveRecord::Schema.define(version: 20160310125302) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
   end
+
+  add_index "shopping_cart_orders", ["user_type", "user_id"], name: "index_shopping_cart_orders_on_user_type_and_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.datetime "created_at",                          null: false
@@ -103,6 +107,8 @@ ActiveRecord::Schema.define(version: 20160310125302) do
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
+    t.string   "firstname"
+    t.string   "lastname"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

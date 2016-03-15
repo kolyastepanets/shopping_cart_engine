@@ -7,7 +7,7 @@ module ShoppingCart
     before_action :load_order_item, only: :destroy
 
     def create
-      if @order.add_product(@product, params[:quantity], params[:price])
+      if @order.add_product(@product, params[:quantity])
         redirect_to cart_path
       else
         redirect_to product_path(@product)
@@ -18,7 +18,7 @@ module ShoppingCart
       @order_item.destroy
       if @order.order_items.empty?
         @order.destroy
-        redirect_to main_app.root_path
+        redirect_to root_path
       else
         redirect_to cart_path
       end

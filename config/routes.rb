@@ -10,4 +10,6 @@ ShoppingCart::Engine.routes.draw do
       get :completed
     end
   end
+
+  root "carts#show"
 end

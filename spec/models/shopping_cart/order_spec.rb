@@ -16,20 +16,22 @@ module ShoppingCart
     let(:order) { create(:shopping_cart_order) }
     let(:book1) { create(:book) }
     let(:book2) { create(:book, price: 100) }
+    let!(:order_item) { create(:shopping_cart_order_item) }
+    let!(:order_item2) { create(:shopping_cart_order_item) }
 
     context "#total_price" do
+      let(:order) { create(:shopping_cart_order, order_items: [order_item, order_item2]) }
+
       it "counts total price" do
-        order.add_product(book1.id, 1, book1.price)
-        order.add_product(book2.id, 2, book2.price)
-        expect(order.total_price).to eq (210)
+        expect(order.total_price).to eq (20)
       end
     end
 
     context "#total_quantity" do
+      let(:order) { create(:shopping_cart_order, order_items: [order_item, order_item2]) }
+
       it "counts all items in cart" do
-        order.add_product(book1.id, 1, book1.price)
-        order.add_product(book2.id, 2, book2.price)
-        expect(order.total_quantity).to eq (3)
+        expect(order.total_quantity).to eq (2)
       end
     end
 
@@ -61,14 +63,14 @@ module ShoppingCart
       let(:order_item) { create(:shopping_cart_order_item, order: order) }
 
       it "increases quantity if order_item exist" do
-        order.add_product(order_item.product, 1, 10)
+        order.add_product(order_item.product, 1)
         order_item.reload
         expect(order_item.quantity).to eq(2)
       end
 
       it "creates new order item" do
-        order.add_product(book1.id, 1, book1.price)
-        expect(order.order_items.size).to eq 1
+        order = create(:shopping_cart_order, order_items: [order_item, order_item2])
+        expect(order.order_items.size).to eq 2
       end
     end
 

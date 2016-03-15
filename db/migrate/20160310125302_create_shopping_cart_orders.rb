@@ -6,7 +6,7 @@ class CreateShoppingCartOrders < ActiveRecord::Migration
       t.integer :delivery_id
       t.integer :coupon_id
       t.decimal :total_price
-      t.belongs_to :user, polymorphic: true
+      t.references :user, polymorphic: true, index: true
 
       t.timestamps null: false
     end

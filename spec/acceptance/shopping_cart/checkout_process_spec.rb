@@ -7,12 +7,8 @@ feature 'user can buy book', %q{
 } do
 
   given(:book) { create(:book) }
-  # given(:book2) { create(:book) }
 
   given!(:order_item) { create(:shopping_cart_order_item, product: book) }
-  # given!(:order_item2) { create(:shopping_cart_order_item, product: book2) }
-
-  # given!(:order) { create(:shopping_cart_order, order_items: [order_item, order_item2]) }
 
   given!(:countries) { create_list(:shopping_cart_country, 2) }
 

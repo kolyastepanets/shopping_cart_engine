@@ -27,6 +27,11 @@ Rails.application.routes.draw do
 end
 ```
 
+### Also you need to set root inside your routes
+```ruby
+root to: "home#index"
+```
+
 ### Add behaviour to your product in model
 ```ruby
 class Book < ActiveRecord::Base
@@ -45,12 +50,21 @@ end
 ```ruby
 rails generate shopping_cart:views
 ```
+Views will be created app/views/shopping_cart/...
 
 ### Add form to your product page
 ```ruby
 = form_tag(shopping_cart.order_items_path(book_id: @book)) do
-  .input-group
-    = number_field_tag(:quantity, 1, min: 1, class: 'form-control')
-    .input-group-btn
-      = submit_tag "Add to Cart", class: "btn btn-primary"
+  = number_field_tag(:quantity, 1, min: 1, class: 'form-control')
+  = submit_tag "Add to Cart", class: "btn btn-primary"
+```
+
+### Unless you are using Devise, you have to add method to Application Controller
+```ruby
+class ApplicationController < ActionController::Base
+  def current_user
+    @user
+  end
+end
+
 ```

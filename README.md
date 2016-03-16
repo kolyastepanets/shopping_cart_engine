@@ -12,19 +12,27 @@ gem 'shopping_cart', git: 'git://github.com/kolyastepanets/shopping_cart_engine'
 
 Run `bundle install`
 
-### Install migrations
-
+### Install settings
 ```ruby
-rake shopping_cart:install:migrations
-rake db:migrate
+rails generate shopping_cart:settings
 ```
 
-### Mount Engine
-
+##### This command mounts engine:
 ```ruby
 Rails.application.routes.draw do
   mount ShoppingCart::Engine, at: "/shopping"
 end
+```
+##### Adds migration from Engine to Your application
+
+##### Adds seeds to your file
+
+##### Adds images
+
+### Run
+```ruby
+rake db:migrate
+rake db:seed
 ```
 
 ### Also you need to set root inside your routes
@@ -50,7 +58,7 @@ end
 ```ruby
 rails generate shopping_cart:views
 ```
-Views will be created app/views/shopping_cart/...
+Views will be created `app/views/shopping_cart/...`
 
 ### Add form to your product page
 ```ruby
@@ -59,12 +67,24 @@ Views will be created app/views/shopping_cart/...
   = submit_tag "Add to Cart", class: "btn btn-primary"
 ```
 
+### Add link to your cart
+```ruby
+= link_to "#{@order.total_quantity} ( #{number_to_currency @order.total_price_with_delivery_with_discount} )", cart_path
+```
+
 ### Unless you are using Devise, you have to add method to Application Controller
 ```ruby
 class ApplicationController < ActionController::Base
   def current_user
     @user
   end
+  helper_method :current_user
 end
+```
 
+### By default in views model product has columns:
+```
+title
+description
+price
 ```
